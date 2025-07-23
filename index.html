@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <title>Flask App</title>
+</head>
+
+<body>
+    <div class="chat-container">
+        <!-- 新增的標題區塊 -->
+        <div class="chat-header">Library AI Chatbot</div>
+
+        <!-- Loading gif -->
+        <div id="loading_img"><img src="{{ url_for('static', filename='images/loading.gif') }}" alt="Loading..."
+                width="30px"></div>
+
+        <!-- 回應訊息區域，設置最大高度 -->
+        <div id="responseMessage" style="max-height: 80%; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none;line-height:25px;">
+            <!-- <div class="introduction">請勿提問非圖書館問題.<br>如要找書請簡短輸入 <span style="color: #d6560c;;">我要找xxx的書</span> 讓Ai小幫手幫您找看看.<p>
+                Please do not ask non-library-related questions.<br>If you're looking for a book,  just type <span style="color: #d6560c;;">Please find books on xxx</span> so our AI assistant can help you find it.</div> -->
+        </div>
+
+        <!-- 提交表單 -->
+        <div class="login">
+            <form id="myForm" class="form">
+                <input type="text" id="question" name="question" placeholder="text..." required>
+                <button type="submit">✈</button>
+            </form>
+        </div>
+    </div>
+   
+   
+    <script>
+        let isPrinting = false;  // 用來標誌是否正在列印回答
+        let currentInterval = null;  // 存儲當前的setInterval ID，以便可以中止
+    
+        document.getElementById('myForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+    
+            // 清空之前的回答和按鈕
+            const messageDiv = document.getElementById('responseMessage');
+            messageDiv.innerHTML = messageDiv.innerHTML.split('<div class="introduction">')[0]; // 清除介紹文本部分
+            messageDiv.scrollTop = messageDiv.scrollHeight;  // 滾動到底部
+    
+            // 提取問題並顯示用戶訊息
+            const question = document.getElementById('question').value;
+            document.getElementById('question').value = ''; // 清空問題輸入框
+    
+            const userMessage = `
+                <div class="message user-message-wrapper">
+                    <div class="user-message">
+                        <span>${question}</span>
+                    </div>
+                </div>
+            `;
+            messageDiv.innerHTML += userMessage;
+            messageDiv.scrollTop = messageDiv.scrollHeight;
+    
+            document.getElementById('loading_img').style.display = 'block';
+    
+            // 發送問題給伺服器並等待回應
+            const response = await fetch('/lib_test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "question": question })
+            });
+    
+            const result = await response.json();
+    
+            if (response.ok) {
+                const aiMessageWrapper = document.createElement('div');
+                aiMessageWrapper.classList.add('message', 'ai-message');
+                const aiMessageDiv = document.createElement('div');
+                aiMessageWrapper.appendChild(aiMessageDiv);
+                messageDiv.appendChild(aiMessageWrapper);
+    
+                let answer0 = result.answer;
+                const answer = decodeURIComponent(answer0); // 解碼從python傳遞來的中文字
+    
+                let currentIndex = 0;
+                isPrinting = true;  // 標記正在列印
+    
+                // 如果有正在列印的回答，停止目前的setInterval
+                if (currentInterval !== null) {
+                    clearInterval(currentInterval);
+                }
+    
+                // 開始新的一個回答列印
+                currentInterval = setInterval(() => {
+                   // 如果碰到 <br>，整段直接塞進去
+                    if (answer.slice(currentIndex, currentIndex + 4) === '<br>') {
+                        aiMessageDiv.innerHTML += '<br>';
+                        currentIndex += 4;
+                    } else {
+                        aiMessageDiv.innerHTML += answer[currentIndex];
+                        currentIndex++;
+                    }
+    
+                    messageDiv.scrollTop = messageDiv.scrollHeight;
+    
+                    if (currentIndex >= answer.length) {
+                        clearInterval(currentInterval);  // 完成列印後清除interval
+                        isPrinting = false;  // 標記回答列印完成
+    
+                        if (answer.includes("館藏查詢")) {
+                            let result = answer.split("：")[1]; 
+                            if (result === undefined){
+                                aiMessageDiv.innerHTML += "<br><a href='https://aleph.lib.cgu.edu.tw/F?func=find-b&find_code=WRD&adjacent=Y&local_base=FLY03' target='_blank'>前去館藏查詢平台</a><br>或者請輸入 <span style='color:#d6560c'>我要找xxx的書</span>，讓我幫您找看看.";                
+                            } else {
+                                aiMessageDiv.innerHTML += "&nbsp;<a href='https://aleph.lib.cgu.edu.tw/F?func=find-b&find_code=WRD&adjacent=Y&local_base=FLY03&request=" + result + "' target='_blank'>前去館藏查詢平台</a>";                       
+                            }
+                        }
+                        if (answer.includes("visit the catalog")|| answer.includes("online catalog")|| answer.includes("find a book")|| answer.includes("any books on")|| answer.includes("a book about")|| answer.includes("a book on")|| answer.includes("a book by")|| answer.includes("search for books")) {                     
+                            let result = answer.split("：")[1]; 
+                            if (result === undefined){
+                                aiMessageDiv.innerHTML += "<br><a href='https://aleph.lib.cgu.edu.tw/F?func=find-b&find_code=WRD&adjacent=Y&local_base=FLY03&CON_LNG=ENG' target='_blank'>Go to the catalog search website</a><br>or you can enter <span style='color:#d6560c'>find the book by xxx</span>, and let me help you search.";                
+                            } else {
+                                aiMessageDiv.innerHTML += "&nbsp;<a href='https://aleph.lib.cgu.edu.tw/F?func=find-b&find_code=WRD&adjacent=Y&local_base=FLY03&request=" + result + "&CON_LNG=ENG' target='_blank'>Go to the catalog search website</a>";                       
+                            }
+                        }
+    
+                        // 顯示讚和倒讚按鈕
+                        const thumbsWrapper = document.createElement('div');
+                        thumbsWrapper.classList.add('thumbs-wrapper');
+                        
+                        const thumbsUp = document.createElement('button');
+                        thumbsUp.textContent = '👍';
+                        thumbsUp.classList.add('thumbs-up');
+                        thumbsUp.style.opacity = 0.2;  // 默認顏色透明
+    
+                        thumbsUp.onclick = () => {
+                            thumbsUp.style.opacity = thumbsUp.style.opacity === "0.2" ? "1" : "0.2";  // 切換透明度
+                            thumbsDown.style.opacity = 0.2;  // 讓倒讚按鈕透明
+                            updateThumbsStatus('Up', question, answer);
+                        };
+    
+                        const thumbsDown = document.createElement('button');
+                        thumbsDown.textContent = '👎';
+                        thumbsDown.classList.add('thumbs-down');
+                        thumbsDown.style.opacity = 0.2;  // 默認顏色透明
+    
+                        thumbsDown.onclick = () => {
+                            thumbsDown.style.opacity = thumbsDown.style.opacity === "0.2" ? "1" : "0.2";  // 切換透明度
+                            thumbsUp.style.opacity = 0.2;  // 讓讚按鈕透明
+                            updateThumbsStatus('Down', question, answer);
+                        };
+    
+                        thumbsWrapper.appendChild(thumbsUp);
+                        thumbsWrapper.appendChild(thumbsDown);
+                        messageDiv.appendChild(thumbsWrapper);
+                        messageDiv.scrollTop = messageDiv.scrollHeight;
+                    }
+                }, 50);  // 每50ms列印一個字
+    
+                messageDiv.scrollTop = messageDiv.scrollHeight;
+            } else {
+                messageDiv.innerText = `Error: ${result.error}`;
+            }
+    
+            document.getElementById('loading_img').style.display = 'none';
+        });
+    
+        function updateThumbsStatus(thumbs, question, answer) {
+            var chat_id = JSON.parse('{{ chat_id | tojson }}');  
+            const data = {
+                chat_id_: chat_id,
+                question_: question,
+                answer_: answer,
+                thumbs_: thumbs
+            };
+            fetch('/record_qa', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => console.log('成功:', data))
+            .catch((error) => console.error('錯誤:', error));
+        }
+    
+        window.onload = function () {
+            fetch('/clear', { method: 'POST' });
+        };
+    </script>
+    
+</body>
+
+</html> 
