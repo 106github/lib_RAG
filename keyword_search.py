@@ -51,7 +51,7 @@ def is_book_query(input_text):
 
 def book_search_chi(query):
     query = urllib.parse.quote(query, encoding='utf-8')
-    url = f"https://aleph.lib.cgu.edu.tw/F?func=find-b&find_code=WRD&adjacent=Y&local_base=FLY03&request={query}"
+    url = f"https://xxx/F?func=find-b&find_code=WRD&adjacent=Y&local_base=FLY03&request={query}"
     print(f"正在查詢的 URL: {url}") # 加入這行
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'}
     
@@ -110,7 +110,7 @@ def book_search_chi(query):
 
 def book_search_eng(query):
     query = urllib.parse.quote(query, encoding='utf-8')
-    url = f"https://aleph.lib.cgu.edu.tw/F?func=find-b&find_code=WRD&adjacent=Y&local_base=FLY03&request={query}"  # 這裡有URL構建
+    url = f"https://xxx/F?func=find-b&find_code=WRD&adjacent=Y&local_base=FLY03&request={query}"  # 這裡有URL構建
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'}
 
     response = requests.get(url, headers=headers)
