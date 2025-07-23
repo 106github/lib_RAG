@@ -1,0 +1,457 @@
+/* 基本樣式 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #9e9fad;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 標題區塊樣式 */
+.chat-header {
+  background-color: #fc3c35; /* 綠色背景 */
+  color: white; /* 白色文字 */
+  text-align: center; /* 文字居中 */
+  letter-spacing: 1px;
+  padding: 10px 0; /* 垂直方向縮小padding，去除左右空白 */
+  font-size: 24px; /* 字體大小 *//* 基本樣式 */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #9e9fad;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* 標題區塊樣式 */
+  .chat-header {
+    background-color: #fc3c35; /* 綠色背景 */
+    color: white; /* 白色文字 */
+    text-align: center; /* 文字居中 */
+    letter-spacing: 1px;
+    padding: 10px 0; /* 垂直方向縮小padding，去除左右空白 */
+    font-size: 24px; /* 字體大小 */
+    margin: 0; /* 移除標題區塊的外邊距 */
+    border-radius: 15px 15px 0 0; /* 只有頂部圓角 */
+    width: 108%; /* 確保寬度為100% */
+    margin-left: -20px;
+    position: relative; /* 相對定位 */
+    z-index: 10; /* 設置標題區塊在最上層 */
+  }
+  
+  /* 聊天框容器樣式 */
+  .chat-container {
+    width: 100%; /* 確保寬度100% */
+    max-width: 600px;
+    height: 80vh;
+    background-color: white;
+    border-radius: 15px; /* 保持圓角 */
+    overflow-y: auto;
+    padding: 0 20px 20px; /* 保留底部的間距，左右的padding用來保證內部有適當的邊距 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  .introduction{
+    font-family: "Oxygen",sans-serif;
+    font-size: 18px;  
+    margin:0 15px;  
+    color: #505050;
+  }
+  /* 問題和回答的訊息樣式 */
+  .message {
+    display: flex;
+    margin-top: 15px;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+  
+  .user-message-wrapper {
+    display: flex;
+    justify-content: flex-end; /* 確保內容靠右對齊 */
+    width: 100%; /* 填滿容器的寬度 */
+  }
+  
+  .user-message {
+    background-color: #f74b46;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 20px;
+    width:auto;
+    word-wrap: break-word; /* 防止單字超出邊界 */
+    word-break: break-word; /* 強制換行 */
+  }
+  
+  /* AI回答（左邊顯示） */
+  .ai-message {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 20px;
+    width:80%;
+    align-self: flex-start; /* 向左對齊 */
+    word-wrap: break-word;
+  }
+  
+  /* 提交表單的樣式 */
+  form {
+    display: flex;
+    align-items: center; /* 垂直置中 */
+    width: 100%;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    padding-left:20px;
+    margin: 10px 0;
+    background-color: #f1f1f1;
+    border: 0;
+    border-radius: 20px;
+    font-size: 16px;
+    width: 85%; /* 設定寬度占大部分 */
+    margin-right: 10px; /* 讓箭頭按鈕和輸入框有間距 */
+  }
+  input[type="text"]::placeholder {
+    color: #999999;  /* 設定預設文字的顏色 */
+    font-style: italic; /* 讓預設文字顯得更淡，像是提示 */
+  }
+  input[type="text"]:focus::placeholder {
+    color: transparent; /* 聚焦時，隱藏預設文字 */
+  }
+  input[type="text"]:focus {
+    outline: none;  /* 去除焦點時的藍色框 */
+    border: 0;      /* 確保焦點時無邊框 */
+  }
+  
+  input[type="text"]::placeholder {
+    color: #999999;  /* 設定預設文字的顏色 */
+    font-style: italic; /* 讓預設文字顯得更淡，像是提示 */
+  }
+  
+  /* 當 input 被聚焦時，清除預設文字 */
+  input[type="text"]:focus::placeholder {
+    color: transparent; /* 聚焦時，隱藏預設文字 */
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #F74B46;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px; /* 較大的箭頭 */
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  button:hover {
+    background-color: #f74b46;
+  }
+  
+  /* 按鈕容器，用於將按鈕放在同一行 */
+  .thumbs-wrapper {
+    display: flex;           /* 使用 flex 佈局 */
+    justify-content: start;  /* 按鈕靠左對齊 */
+  }
+  
+  /* 按鈕樣式 */
+  button.thumbs-up,
+  button.thumbs-down {
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    background-color: #fff;
+    width:35px;
+  }
+  button.thumbs-up:hover {
+    background-color: #fff;
+  }
+  button.thumbs-down:hover {
+    background-color: #fff;
+  }
+   
+  
+  /* Loading動畫 */
+  #loading_img {
+    height:50px;
+    display: none;
+    text-align: center;
+    position: absolute; /* 絕對定位 */
+    top: 85%; /* 垂直居中 */
+    left: 30px; /* 水平居中 */
+    z-index: 9999; /* 設置在最上層 */
+  }
+  
+  /* 回應訊息區域 */
+  #responseMessage {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 隱藏超出部分 */
+    transition: transform 0.5s ease; /* 設置過渡效果 */
+    position: relative; /* 相對定位 */
+    z-index: 1; /* 設置訊息區塊在標題下方 */
+    margin-top:-50px;
+  }
+  
+  /* 修改表單樣式，將標籤放到表單的最底部 */
+  form label {
+    margin-top: auto;
+    text-align: center;
+    display: block;
+  }
+  
+   
+  /* 問題和回答的訊息樣式 */
+  .message {
+    display: flex;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+  
+   
+  
+  button:hover {
+    transform: scale(0.9);
+    opacity:1;
+  }
+  
+  /* 當按鈕被按下時縮小 */
+  button:active {
+    transform: scale(0.8);
+    background-color: #f62720; /* 按下時稍微改變背景顏色 */
+  }
+  
+  /* 當未滑入或未按下時，背景顏色維持原樣 */
+  button:focus {
+    outline: none;
+  }
+  margin: 0; /* 移除標題區塊的外邊距 */
+  border-radius: 15px 15px 0 0; /* 只有頂部圓角 */
+  width: 108%; /* 確保寬度為100% */
+  margin-left: -20px;
+  position: relative; /* 相對定位 */
+  z-index: 10; /* 設置標題區塊在最上層 */
+}
+
+/* 聊天框容器樣式 */
+.chat-container {
+  width: 100%; /* 確保寬度100% */
+  max-width: 600px;
+  height: 80vh;
+  background-color: white;
+  border-radius: 15px; /* 保持圓角 */
+  overflow-y: auto;
+  padding: 0 20px 20px; /* 保留底部的間距，左右的padding用來保證內部有適當的邊距 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.introduction{
+  font-family: "Oxygen",sans-serif;
+  font-size: 18px;  
+  margin:0 15px;  
+  color: #505050;
+}
+/* 問題和回答的訊息樣式 */
+.message {
+  display: flex;
+  margin-top: 15px;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.user-message-wrapper {
+  display: flex;
+  justify-content: flex-end; /* 確保內容靠右對齊 */
+  width: 100%; /* 填滿容器的寬度 */
+}
+
+.user-message {
+  background-color: #f74b46;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 20px;
+  width:auto;
+  word-wrap: break-word; /* 防止單字超出邊界 */
+  word-break: break-word; /* 強制換行 */
+}
+
+/* AI回答（左邊顯示） */
+.ai-message {
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 20px;
+  width:80%;
+  align-self: flex-start; /* 向左對齊 */
+  word-wrap: break-word;
+}
+
+/* 提交表單的樣式 */
+form {
+  display: flex;
+  align-items: center; /* 垂直置中 */
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+input[type="text"] {
+  padding: 10px;
+  padding-left:20px;
+  margin: 10px 0;
+  background-color: #f1f1f1;
+  border: 0;
+  border-radius: 20px;
+  font-size: 16px;
+  width: 85%; /* 設定寬度占大部分 */
+  margin-right: 10px; /* 讓箭頭按鈕和輸入框有間距 */
+}
+input[type="text"]::placeholder {
+  color: #999999;  /* 設定預設文字的顏色 */
+  font-style: italic; /* 讓預設文字顯得更淡，像是提示 */
+}
+input[type="text"]:focus::placeholder {
+  color: transparent; /* 聚焦時，隱藏預設文字 */
+}
+input[type="text"]:focus {
+  outline: none;  /* 去除焦點時的藍色框 */
+  border: 0;      /* 確保焦點時無邊框 */
+}
+
+input[type="text"]::placeholder {
+  color: #999999;  /* 設定預設文字的顏色 */
+  font-style: italic; /* 讓預設文字顯得更淡，像是提示 */
+}
+
+/* 當 input 被聚焦時，清除預設文字 */
+input[type="text"]:focus::placeholder {
+  color: transparent; /* 聚焦時，隱藏預設文字 */
+}
+
+button {
+  padding: 10px;
+  background-color: #F74B46;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px; /* 較大的箭頭 */
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover {
+  background-color: #f74b46;
+}
+
+/* 按鈕容器，用於將按鈕放在同一行 */
+.thumbs-wrapper {
+  display: flex;           /* 使用 flex 佈局 */
+  justify-content: start;  /* 按鈕靠左對齊 */
+}
+
+/* 按鈕樣式 */
+button.thumbs-up,
+button.thumbs-down {
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  background-color: #fff;
+  width:35px;
+}
+button.thumbs-up:hover {
+  background-color: #fff;
+}
+button.thumbs-down:hover {
+  background-color: #fff;
+}
+ 
+
+/* Loading動畫 */
+#loading_img {
+  height:50px;
+  display: none;
+  text-align: center;
+  position: absolute; /* 絕對定位 */
+  top: 85%; /* 垂直居中 */
+  left: 30px; /* 水平居中 */
+  z-index: 9999; /* 設置在最上層 */
+}
+
+/* 回應訊息區域 */
+#responseMessage {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 隱藏超出部分 */
+  transition: transform 0.5s ease; /* 設置過渡效果 */
+  position: relative; /* 相對定位 */
+  z-index: 1; /* 設置訊息區塊在標題下方 */
+  margin-top:-50px;
+}
+
+/* 修改表單樣式，將標籤放到表單的最底部 */
+form label {
+  margin-top: auto;
+  text-align: center;
+  display: block;
+}
+
+ 
+/* 問題和回答的訊息樣式 */
+.message {
+  display: flex;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+ 
+
+button:hover {
+  transform: scale(0.9);
+  opacity:1;
+}
+
+/* 當按鈕被按下時縮小 */
+button:active {
+  transform: scale(0.8);
+  background-color: #f62720; /* 按下時稍微改變背景顏色 */
+}
+
+/* 當未滑入或未按下時，背景顏色維持原樣 */
+button:focus {
+  outline: none;
+}
