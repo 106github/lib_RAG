@@ -1,8 +1,6 @@
 from flask import Flask, jsonify, request, session, render_template
-# from lib_rag import test as test_lib, create_memory, reset_user_memory
-from book_rag import test as test_lib, create_memory, reset_user_memory
-# from mcut_rag import test as test_lib, create_memory, reset_user_memory
-# from care_rag import test as test_lib, create_memory, reset_user_memory
+from lib_rag import test as test_lib, create_memory, reset_user_memory
+# from book_rag import test as test_lib, create_memory, reset_user_memory
 
 from langchain.memory import ConversationBufferMemory 
 import datetime
