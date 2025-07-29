@@ -1,8 +1,10 @@
-from flask import Flask, jsonify, request, session, render_template
-# 您的RAG函式庫
+from flask import Flask, jsonify, request, session, render_template, redirect, url_for
 from lib_rag import test as test_lib, create_memory, reset_user_memory
 # from book_rag import test as test_lib, create_memory, reset_user_memory
+# from mcut_rag import test as test_lib, create_memory, reset_user_memory
+# from care_rag import test as test_lib, create_memory, reset_user_memory
  
+
 from langchain.memory import ConversationBufferMemory
 import datetime
 import uuid
@@ -50,7 +52,7 @@ def lib_test():
         db = pymysql.connect(**DB_CONFIG)
         cursor = db.cursor()
         
-        lib_value = "lib"
+        lib_value = "mcut"
         current_date = datetime.date.today()
         
         sql = "INSERT INTO qa_table(session_id, lib, question, answer, thumbs, day_time) VALUES(%s, %s, %s, %s, NULL, %s)"
