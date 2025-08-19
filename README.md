@@ -1,7 +1,7 @@
 需要另外安裝的開源套件有:
-Python 建議 3.10.8 版本
-ollama 安裝網頁 https://ollama.com/download
-gemma3:12b 可在本地 Ollama 中下載
+Python 建議 3.10.8 版本<br>
+ollama 安裝網頁 https://ollama.com/download<br>
+gemma3:12b 可在本地 Ollama 中下載<br>
 pip install langchain-ollama //使用 langchain_ollama 來呼叫本地 Ollama 的 Gemma 模型
 pip install flask  //用於建立 Web 應用伺服器
 pip install pymysql //與 MySQL 資料庫進行連線與操作
