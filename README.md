@@ -14,7 +14,6 @@ pip install huggingface-hub transformers //使用 HuggingFace 提供的嵌入模
 pip install sentence-transformers //使用HuggingFace 上的 thenlper/gte-large 模型嵌入書籍內容<br>
 <br>
 MySQL表單建立語法:<br>
-
 CREATE TABLE `qa_table` (<br>
   `id` int NOT NULL AUTO_INCREMENT,<br>
   `session_id` varchar(80) DEFAULT NULL,<br>
