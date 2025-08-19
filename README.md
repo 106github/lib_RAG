@@ -1,4 +1,4 @@
-需要另外安裝的開源套件有:
+需要另外安裝的開源套件有:<br>
 Python 建議 3.10.8 版本<br>
 ollama 安裝網頁 https://ollama.com/download<br>
 gemma3:12b 可在本地 Ollama 中下載<br>
