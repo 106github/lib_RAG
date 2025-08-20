@@ -13,7 +13,7 @@ pip install langchain langchain-community //用於構建對話記憶、prompt ch
 pip install huggingface-hub transformers //使用 HuggingFace 提供的嵌入模型 (HuggingFaceEmbeddings)<br>
 pip install sentence-transformers //使用HuggingFace 上的 thenlper/gte-large 模型嵌入書籍內容<br>
 <br>
-MySQL表單建立語法:<br>
+MySQL資料庫表單建立語法:<br>
 CREATE TABLE `qa_table` (<br>
   `id` int NOT NULL AUTO_INCREMENT,<br>
   `session_id` varchar(80) DEFAULT NULL,<br>
@@ -25,3 +25,14 @@ CREATE TABLE `qa_table` (<br>
   PRIMARY KEY (`id`),<br>
   UNIQUE KEY `id_UNIQUE` (`id`)<br>
 ) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb3;
+
+<br><br>
+如果只要提供圖書館常見問題服務即可, 那麼只要下載:<br>
+templates資料夾<br>
+static資料夾<br>
+api.py<br>
+lib_RAG.py<br>
+keyword_search.py //此為館藏查詢爬蟲程式. 需在程式內自行修正成自家圖書館館藏查詢平台的網頁格式. 若不提供查詢則可不必下載<br>
+lib_rag_evaluate.py //此為變體問題測試程式. 若不測試則可不必下載<br>
+lib_rag_multiuser_evaluate.py //此為壓力測試程式. 若不測試則可不必下載<br>
+
