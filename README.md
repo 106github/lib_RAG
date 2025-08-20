@@ -47,9 +47,9 @@ CREATE TABLE `qa_table` (<br>
 
 <br>
 程式下載完後執行前請開啟終端機下指令啟用虛擬環境:<br>
-python -m venv .\lib-chat (創建虛擬環境)
-.\lib-chat\Scripts\activate  (啟用虛擬環境)
-python api.py (啟用平台. 程式裏頭有lib_RAG和book_rag兩種平台看您要啟用哪個就註解掉另一個)
-#若兩館共用同一主機, 則將"圖書館常見問題服務"程式複製成兩個資料夾後再於各自的api.py分別設定各自不同的port即可同步開啟使用
+python -m venv .\lib-chat (創建虛擬環境)<br>
+.\lib-chat\Scripts\activate  (啟用虛擬環境)<br>
+python api.py (啟用平台. 程式裏頭有lib_RAG和book_rag兩種平台看您要啟用哪個就註解掉另一個)<br>
+#若兩館共用同一主機, 則將"圖書館常見問題服務"程式複製成兩個資料夾後再於各自的api.py分別設定各自不同的port即可同步開啟使用<br>
 
 
