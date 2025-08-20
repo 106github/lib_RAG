@@ -26,8 +26,8 @@ CREATE TABLE `qa_table` (<br>
   UNIQUE KEY `id_UNIQUE` (`id`)<br>
 ) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb3;
 
-<br><br>
-⛴︎如果只要提供圖書館常見問題服務即可, 需下載:<br>
+<br>
+⛴︎如要提供圖書館常見問題服務需下載:<br>
 ♥ templates資料夾<br>
 ♥ static資料夾<br>
 ♥ api.py<br>
@@ -37,3 +37,10 @@ CREATE TABLE `qa_table` (<br>
 ⁉︎ lib_rag_evaluate.py //此為變體問題測試程式. 若不測試則可不必下載<br>
 ⁉︎ lib_rag_multiuser_evaluate.py //此為壓力測試程式. 若不測試則可不必下載<br>
 
+<br>
+⛴︎如要提供推薦閱讀服務需下載:<br>
+♥ templates資料夾<br>
+♥ static資料夾<br>
+♥ api.py<br>
+♥ book_rag.py<br>
+♥ book.json<br>
